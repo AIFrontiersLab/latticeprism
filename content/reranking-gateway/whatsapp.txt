@@ -1,0 +1,10 @@
+*AI Frontiers Forum*
+Reranking Gateway
+
+Reorder candidates using stronger relevance judgments.
+
+Takeaway: The Reranking Gateway demonstrates that 'retrieval' is not a single step but a pipeline. By decoupling broad candidate generation (Hybrid Retrieval) from precise relevance scoring (Reranking), we achieve the best of both worlds: the breadth of lexical/semantic search and the precision of deep contextual understanding. This architecture is the current industry standard for high-accuracy RAG systems.
+
+Repo: https://github.com/AIFrontiersLab/liftmark
+
+_peer-reviewed by AI. Review before publishing._

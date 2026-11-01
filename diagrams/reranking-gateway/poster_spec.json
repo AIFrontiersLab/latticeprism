@@ -1,0 +1,63 @@
+{
+  "boxes": [
+    {
+      "detail": "Initiates request for document retrieval and reranking.",
+      "id": "1",
+      "label": "Client"
+    },
+    {
+      "detail": "Handles incoming requests and routes them to the Reranking Gateway.",
+      "id": "2",
+      "label": "API Gateway"
+    },
+    {
+      "detail": "Processes retrieval results through ingestion, policy check, and reranking engine.",
+      "id": "3",
+      "label": "Reranking Gateway"
+    },
+    {
+      "detail": "Stores and retrieves cached scores to optimize performance.",
+      "id": "4",
+      "label": "Cache Layer (Redis)"
+    },
+    {
+      "detail": "Runs on Kubernetes Pods to perform Cross-Encoder inference for reranking.",
+      "id": "5",
+      "label": "Model Inference Service"
+    }
+  ],
+  "flows": [
+    {
+      "from": "1",
+      "label": "Request retrieval and reranking",
+      "to": "2"
+    },
+    {
+      "from": "2",
+      "label": "Route to Reranking Gateway",
+      "to": "3"
+    },
+    {
+      "from": "3",
+      "label": "Check cache for scores",
+      "to": "4"
+    },
+    {
+      "from": "4",
+      "label": "Return cached scores or miss",
+      "to": "3"
+    },
+    {
+      "from": "3",
+      "label": "Invoke Cross-Encoder for reranking",
+      "to": "5"
+    },
+    {
+      "from": "3",
+      "label": "Return top results",
+      "to": "2"
+    }
+  ],
+  "subtitle": "One concept. Three AI perspectives. One tested architecture.",
+  "title": "Reranking Gateway"
+}

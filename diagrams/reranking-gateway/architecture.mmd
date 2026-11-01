@@ -1,0 +1,27 @@
+flowchart LR
+  1["Client"]
+  2["API Gateway"]
+  3["Reranking Gateway"]
+  4["Cache Layer (Redis)"]
+  5["Model Inference Service"]
+  1 -->|Request retrieval and reranking| 2
+  2 -->|Route to Reranking Gateway| 3
+  3 -->|Check cache for scores| 4
+  4 -->|Return cached scores or miss| 3
+  3 -->|Invoke Cross-Encoder for reranking| 5
+  3 -->|Return top results| 2
+
+flowchart TB
+  subgraph happy [Happy path]
+    h_1["Client"]
+    h_2["API Gateway"]
+    h_3["Reranking Gateway"]
+    h_4["Cache Layer (Redis)"]
+    h_5["Model Inference Service"]
+    h_1 --> h_2
+    h_2 --> h_3
+    h_3 --> h_4
+    h_4 --> h_5
+  end
+  fail["Failure / abstain"]
+  h_5 -.-> fail
